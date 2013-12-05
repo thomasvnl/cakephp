@@ -497,6 +497,19 @@ class Router {
  */
 	public static function mapResources($controller, $options = array()) {
 		$hasPrefix = isset($options['prefix']);
+		if( $hasPrefix )
+		{
+			if( strpos( $options['prefix'], '/' ) !== 0 )
+			{
+				$options['prefix'] = '/' . $options['prefix'];
+			}
+
+			if( strcasecmp(substr( $options['prefix'], -1 ), '/' ) !== 0 )
+			{
+				$options['prefix'] = $options['prefix'] . '/';
+			}
+		}
+		
 		$options = array_merge(array(
 			'prefix' => '/',
 			'id' => self::ID . '|' . self::UUID
